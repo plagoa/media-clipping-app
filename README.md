@@ -17,6 +17,16 @@ use a licensed news search provider for other uses.
   server serves both the built app and the search API; `PORT` defaults to 3000.
 - Run `npm test` and `npm run lint` to check the app.
 
+## Deploying on Vercel
+
+Import the repository as a Vite project. Vercel builds the frontend with
+`npm run build` and serves the `dist` directory; the functions in `api/`
+provide the search and media endpoints on the same origin. Push changes and
+redeploy to publish updates. Test `/api/search?source=googleNews&q=test` after
+deployment: a successful response is JSON containing a `results` array.
+Upstream failures or function timeouts can still occur even when the routes
+are deployed. Check Vercel's function logs if that happens.
+
 The app shows an image and audio/video indicators when these are present in RSS
 metadata. It also checks article HTML automatically, with a limited number of
 concurrent requests. Changing the search cancels outstanding checks.
